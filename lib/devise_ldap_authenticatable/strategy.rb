@@ -11,6 +11,7 @@ module Devise
       def authenticate!
         resource = valid_password? && mapping.to.authenticate_with_ldap(params[scope])
         if validate(resource)
+          decorate(resource)
           success!(resource)
         else
           fail(:invalid)
